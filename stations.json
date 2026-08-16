@@ -33,10 +33,10 @@
   "stream": "https://s31.ssl-stream.com:8060/radio.mp3"
 },
 {
-  "name": "harder.fm",
-  "shortName": "H.FM",
+  "name": "Frenchcore Radio",
+  "shortName": "FCR",
   "genre": "Frenchcore",
-  "description": "Frenchcore & harder styles",
-  "stream": "https://frenchcore.co4.in"
+  "description": "Frenchcore radio",
+  "stream": "https://stream.laut.fm/frenchcoreradio"
 }  
 ]
