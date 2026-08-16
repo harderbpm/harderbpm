@@ -39,4 +39,11 @@
   "description": "Frenchcore radio",
   "stream": "https://stream.laut.fm/frenchcoreradio"
 }  
+{
+  "name": "Bluecore",
+  "shortName": "BC",
+  "genre": "Hardcore",
+  "description": "Hardcore, Frenchcore & Uptempo",
+  "stream": "https://stream.laut.fm/bluecore"
+}
 ]
