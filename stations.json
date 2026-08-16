@@ -19,11 +19,11 @@
     "stream": "https://hardstylefm.stream.laut.fm/hardstylefm"
   },
   {
-  "name": "Masters of Hardcore Radio",
-  "shortName": "MOH",
-  "genre": "Hardcore",
-  "description": "24/7 hardcore radio",
-  "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/MASTERSOFHARDCORE.mp3?dist="
+  "name": "Uptempo Banger",
+  "shortName": "UB",
+  "genre": "Uptempo",
+  "description": "Uptempo hardcore",
+  "stream": "https://streams.deltaradio.de/uptempo/mp3-192/streams.deltaradio.de/"
 }
   
 ]
