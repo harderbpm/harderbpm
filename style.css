@@ -85,7 +85,7 @@ main {
 ========================= */
 
 .hero {
-  min-height: 480px;
+  min-height: 360px;
 
   display: flex;
   flex-direction: column;
@@ -106,9 +106,9 @@ main {
 }
 
 .hero h1 {
-  max-width: 800px;
+  max-width: 640px;
 
-  font-size: clamp(48px, 8vw, 88px);
+  font-size: clamp(40px, 5vw, 64px);
   line-height: 0.95;
 
   text-transform: uppercase;
