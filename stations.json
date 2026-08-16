@@ -1,1 +1,7 @@
-
+[
+  {
+    "name": "Hardcore Radio",
+    "genre": "Hardcore",
+    "stream": "https://stream.hardcoreradio.nl:9000/hcr.ogg"
+  }
+]
