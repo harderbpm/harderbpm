@@ -24,6 +24,13 @@
   "genre": "Uptempo",
   "description": "Uptempo hardcore",
   "stream": "https://streams.deltaradio.de/uptempo/mp3-192/streams.deltaradio.de/"
+},
+  {
+  "name": "SkellyWays Radio",
+  "shortName": "SW",
+  "genre": "Hardcore",
+  "description": "Hardcore radio",
+  "stream": "https://s31.ssl-stream.com:8060/radio.mp3"
 }
   
 ]
