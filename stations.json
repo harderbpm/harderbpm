@@ -45,5 +45,12 @@
   "genre": "Hardcore",
   "description": "Hardcore, Frenchcore & Uptempo",
   "stream": "https://stream.laut.fm/bluecore"
+},
+  {
+  "name": "Krach Keller",
+  "shortName": "KK",
+  "genre": "Uptempo",
+  "description": "Hardcore & Uptempo",
+  "stream": "https://stream.laut.fm/krach-keller"
 }
 ]
