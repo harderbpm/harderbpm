@@ -1,1 +1,280 @@
+/* =========================
+   HarderBPM - Base
+========================= */
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background: #070707;
+  --surface: #111111;
+  --surface-light: #181818;
+  --text: #ffffff;
+  --muted: #a5a5a5;
+  --yellow: #ffd400;
+  --border: #252525;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255, 212, 0, 0.08), transparent 28%),
+    var(--background);
+
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+
+  padding-bottom: 110px;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.site-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+.logo span {
+  color: var(--yellow);
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+
+/* =========================
+   Main
+========================= */
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+
+/* =========================
+   Hero
+========================= */
+
+.hero {
+  min-height: 480px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  color: var(--yellow);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  max-width: 800px;
+
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: 0.95;
+
+  text-transform: uppercase;
+  letter-spacing: -4px;
+
+  margin-bottom: 28px;
+}
+
+.hero h1 span {
+  color: var(--yellow);
+}
+
+.hero-text {
+  color: var(--muted);
+
+  max-width: 520px;
+
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   Stations
+========================= */
+
+.stations {
+  padding: 55px 0 80px;
+}
+
+.stations h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+#station-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(220px, 1fr));
+
+  gap: 20px;
+}
+
+
+/* =========================
+   Player
+========================= */
+
+.player {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  min-height: 90px;
+
+  padding: 18px max(28px, calc((100vw - 1200px) / 2));
+
+  background: rgba(12, 12, 12, 0.96);
+
+  border-top: 2px solid var(--yellow);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 100;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.player-dot {
+  width: 10px;
+  height: 10px;
+
+  background: var(--yellow);
+  border-radius: 50%;
+}
+
+.player-label {
+  color: var(--yellow);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  margin-bottom: 4px;
+}
+
+#player-station-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.player-button {
+  width: 54px;
+  height: 54px;
+
+  border-radius: 50%;
+
+  border: 1px solid var(--yellow);
+
+  background: transparent;
+  color: var(--yellow);
+
+  font-size: 19px;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 650px) {
+
+  .site-header {
+    padding: 22px 18px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  main {
+    padding: 0 18px;
+  }
+
+  .hero {
+    min-height: 390px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    letter-spacing: -2.5px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+  }
+
+  .stations {
+    padding-top: 38px;
+  }
+
+  .player {
+    min-height: 78px;
+    padding: 12px 18px;
+  }
+
+  .player-button {
+    width: 48px;
+    height: 48px;
+  }
+
+}
