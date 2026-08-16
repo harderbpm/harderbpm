@@ -270,12 +270,12 @@ main {
 
 .station-card-content {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 96px 1fr;
   align-items: center;
   gap: 18px;
 
-  min-height: 100px;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  min-width: 0;
 }
 
 .station-icon {
