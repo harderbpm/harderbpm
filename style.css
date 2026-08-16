@@ -241,47 +241,54 @@ main {
   border-radius: 14px;
 
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 30px 1fr 48px;
+  gap: 18px;
 }
+
+
+/* bovenste regel */
 
 .station-card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 34px;
 }
 
 .station-badge {
   background: var(--yellow);
   color: #000;
+
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 1px;
+
   padding: 5px 8px;
   border-radius: 4px;
 }
 
 .station-genre {
   color: var(--muted);
+
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
+
+/* midden van de kaart */
+
 .station-card-content {
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 72px 1fr;
   align-items: center;
   gap: 18px;
 
-  margin: 20px 0;
   min-width: 0;
 }
 
 .station-icon {
   width: 72px;
   height: 72px;
-  flex-shrink: 0;
 
   display: grid;
   place-items: center;
@@ -292,13 +299,19 @@ main {
   border: 1px solid #292929;
 
   color: var(--yellow);
-  font-size: 34px;
+
+  font-size: 30px;
   font-weight: 900;
 }
 
+.station-card-content > div:last-child {
+  min-width: 0;
+}
+
 .station-card h3 {
-  font-size: clamp(18px, 2vw, 22px);
+  font-size: 22px;
   line-height: 1.08;
+
   margin-bottom: 7px;
 
   overflow-wrap: break-word;
@@ -309,9 +322,12 @@ main {
   font-size: 14px;
 }
 
+
+/* knop altijd op exact dezelfde plek */
+
 .station-play-button {
   width: 100%;
-  padding: 15px 18px;
+  height: 48px;
 
   display: flex;
   align-items: center;
