@@ -10,5 +10,12 @@
     "shortName": "RHR",
     "genre": "Hardstyle",
     "stream": "https://stream.realhardstyle.nl/"
+  },
+  {
+    "name": "Hardstyle FM",
+    "shortName": "HFM",
+    "genre": "Hardstyle",
+    "description": "24/7 hardstyle radio",
+    "stream": "https://hardstylefm.stream.laut.fm/hardstylefm"
   }
 ]
