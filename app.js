@@ -20,7 +20,7 @@ fetch("stations.json")
         </div>
 
         <div class="station-card-content">
-          <div class="station-icon">H</div>
+          <div class="station-icon">${station.shortName}</div>
 
           <div>
             <h3>${station.name}</h3>
