@@ -297,15 +297,11 @@ main {
 }
 
 .station-card h3 {
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.1;
-
-  min-height: 48px;
-
-  display: flex;
-  align-items: center;
-
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.08;
   margin-bottom: 7px;
+
+  overflow-wrap: break-word;
 }
 
 .station-card p {
@@ -332,7 +328,6 @@ main {
   font-weight: 800;
 
   cursor: pointer;
-  margin-top: auto;
 }
 
 /* =========================
