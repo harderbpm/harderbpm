@@ -31,6 +31,13 @@
   "genre": "Hardcore",
   "description": "Hardcore radio",
   "stream": "https://s31.ssl-stream.com:8060/radio.mp3"
+},
+  {
+  "name": "FRENCHCORE24FM",
+  "shortName": "F24",
+  "genre": "Frenchcore",
+  "description": "24/7 Frenchcore radio",
+  "stream": "https://stream.hostbee.nl:1320/stream"
 }
   
 ]
