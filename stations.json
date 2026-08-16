@@ -1,7 +1,14 @@
 [
   {
     "name": "Hardcore Radio",
+    "shortName": "HR",
     "genre": "Hardcore",
     "stream": "https://stream.hardcoreradio.nl:9000/hcr.ogg"
+  },
+  {
+    "name": "Real Hardstyle Radio",
+    "shortName": "RHR",
+    "genre": "Hardstyle",
+    "stream": "https://stream.realhardstyle.nl/"
   }
 ]
