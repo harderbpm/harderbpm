@@ -269,10 +269,13 @@ main {
 }
 
 .station-card-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: 72px 1fr;
   align-items: center;
   gap: 18px;
-  margin-bottom: 30px;
+
+  min-height: 100px;
+  margin-bottom: 20px;
 }
 
 .station-icon {
