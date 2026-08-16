@@ -233,15 +233,15 @@ main {
 
 .station-card {
   max-width: 420px;
-  min-height: 340px;
+  height: 340px;
   padding: 26px;
 
   background: linear-gradient(145deg, #151515, #0d0d0d);
   border: 1px solid var(--border);
   border-radius: 14px;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .station-card-top {
