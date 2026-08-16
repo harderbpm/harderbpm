@@ -297,7 +297,14 @@ main {
 }
 
 .station-card h3 {
-  font-size: 22px;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.1;
+
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
   margin-bottom: 7px;
 }
 
