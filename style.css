@@ -358,6 +358,10 @@ main {
     padding: 22px 18px;
   }
 
+ .logo img {
+    width: 210px;
+  }
+   
   .tagline {
     display: none;
   }
