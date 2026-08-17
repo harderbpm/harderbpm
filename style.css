@@ -52,13 +52,15 @@ body {
 }
 
 .logo {
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: -1.5px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.logo span {
-  color: var(--yellow);
+.logo img {
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
 }
 
 .tagline {
