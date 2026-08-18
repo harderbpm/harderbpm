@@ -77,24 +77,52 @@
   </main>
 
 
-  <div class="player" id="player">
+<div class="player" id="player">
 
-    <div class="player-info">
-      <div class="player-dot"></div>
+  <div class="player-info">
+    <div class="player-live-dot"></div>
 
-      <div>
-        <div class="player-label">NOW PLAYING</div>
-        <div id="player-station-name">Choose a station</div>
+    <div class="player-text">
+      <div class="player-label">NOW PLAYING</div>
+      <div id="player-station-name">Choose a station</div>
+      <div id="player-station-genre" class="player-genre">
+        Harder styles radio
       </div>
     </div>
+  </div>
 
-    <button id="player-button" class="player-button">
+  <div class="player-controls">
+
+    <button
+      id="player-button"
+      class="player-button"
+      type="button"
+      aria-label="Play or pause stream"
+    >
       ▶
     </button>
 
-    <audio id="audio-player"></audio>
+  </div>
+
+  <div class="player-volume">
+
+    <span class="volume-icon">🔊</span>
+
+    <input
+      id="volume-slider"
+      type="range"
+      min="0"
+      max="1"
+      step="0.05"
+      value="1"
+      aria-label="Volume"
+    >
 
   </div>
+
+  <audio id="audio-player"></audio>
+
+</div>
 
 
   <script src="app.js"></script>
