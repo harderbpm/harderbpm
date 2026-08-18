@@ -110,8 +110,15 @@ playerButton.addEventListener("click", () => {
   }
 });
 
+function updateVolume() {
+  const volume = Number(volumeSlider.value);
+
+  audioPlayer.muted = false;
+  audioPlayer.volume = volume;
+}
+
+volumeSlider.value = 0.5;
 audioPlayer.volume = 0.5;
 
-volumeSlider.addEventListener("input", () => {
-  audioPlayer.volume = Number(volumeSlider.value);
-});
+volumeSlider.addEventListener("input", updateVolume);
+volumeSlider.addEventListener("change", updateVolume);
