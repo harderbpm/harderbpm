@@ -85,9 +85,31 @@ playerButton.addEventListener("click", () => {
     return;
   }
 
-  if (audioPlayer.paused) {
-    audioPlayer
-      .play()
+if (audioPlayer.paused) {
+
+  audioPlayer.volume = Number(volumeSlider.value);
+  audioPlayer.muted = false;
+
+  audioPlayer
+    .play()
+    .then(() => {
+      playerButton.textContent = "❚❚";
+
+      if (currentStationButton) {
+        currentStationButton.querySelector(".station-play-icon").textContent = "❚❚";
+        currentStationButton.querySelector("span:last-child").textContent = "Pause";
+      }
+    })
+    .catch((error) => {
+      console.error("Stream kon niet worden hervat:", error);
+    });
+}
+
+audioPlayer.volume = Number(volumeSlider.value);
+audioPlayer.muted = false;
+
+audioPlayer
+  .play()
       .then(() => {
         playerButton.textContent = "❚❚";
 
