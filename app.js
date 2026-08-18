@@ -3,6 +3,7 @@ const audioPlayer = document.getElementById("audio-player");
 const playerButton = document.getElementById("player-button");
 const playerStationName = document.getElementById("player-station-name");
 const playerStationGenre = document.getElementById("player-station-genre");
+const volumeSlider = document.getElementById("volume-slider");
 
 let currentStation = null;
 let currentStationButton = null;
@@ -107,4 +108,10 @@ playerButton.addEventListener("click", () => {
       currentStationButton.querySelector("span:last-child").textContent = "Listen live";
     }
   }
+});
+
+audioPlayer.volume = 0.5;
+
+volumeSlider.addEventListener("input", () => {
+  audioPlayer.volume = Number(volumeSlider.value);
 });
