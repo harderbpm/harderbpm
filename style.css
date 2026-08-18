@@ -87,13 +87,25 @@ main {
 ========================= */
 
 .hero {
-  min-height: 360px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
 
   border-bottom: 1px solid var(--border);
+}
+
+.hero-content {
+  min-height: 340px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-text-block {
+  position: relative;
+  z-index: 2;
 }
 
 .eyebrow {
@@ -101,10 +113,9 @@ main {
 
   font-size: 12px;
   font-weight: 700;
-
   letter-spacing: 2px;
 
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .hero h1 {
@@ -116,7 +127,7 @@ main {
   text-transform: uppercase;
   letter-spacing: -4px;
 
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .hero h1 span {
@@ -128,11 +139,30 @@ main {
 
   max-width: 520px;
 
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
+.hero-image {
+  height: 340px;
 
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  overflow: hidden;
+}
+
+.hero-image img {
+  display: block;
+
+  width: min(440px, 100%);
+  height: auto;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 30px rgba(255, 212, 0, 0.12));
+}
 /* =========================
    Stations
 ========================= */
