@@ -2,6 +2,7 @@ const stationList = document.getElementById("station-list");
 const audioPlayer = document.getElementById("audio-player");
 const playerButton = document.getElementById("player-button");
 const playerStationName = document.getElementById("player-station-name");
+const playerStationGenre = document.getElementById("player-station-genre");
 
 let currentStation = null;
 let currentStationButton = null;
@@ -56,6 +57,7 @@ fetch("stations.json")
 
         audioPlayer.src = station.stream;
         playerStationName.textContent = station.name;
+        playerStationGenre.textContent = station.genre;
 
         audioPlayer
           .play()
