@@ -1,11 +1,11 @@
 /*.html
-  Cache-Control: no-cache
+  Cache-Control: no-store
 
 /style.css
-  Cache-Control: no-cache
+  Cache-Control: no-store
 
 /app.js
-  Cache-Control: no-cache
+  Cache-Control: no-store
 
 /stations.json
-  Cache-Control: no-cache
+  Cache-Control: no-store
