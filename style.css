@@ -429,3 +429,33 @@ main {
   }
 
 }
+
+/* =========================
+   Tablet Hero
+========================= */
+
+@media (max-width: 900px) and (min-width: 651px) {
+
+  .hero,
+  .hero-content {
+    min-height: 310px;
+  }
+
+  .hero-content {
+    grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 6vw, 52px);
+    letter-spacing: -3px;
+  }
+
+  .hero-image {
+    height: 310px;
+  }
+
+  .hero-image img {
+    width: 340px;
+    max-width: 100%;
+  }
+}
