@@ -281,6 +281,85 @@ main {
 }
 
 /* =========================
+   Volume slider
+========================= */
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.volume-icon {
+  font-size: 15px;
+}
+
+#volume-slider {
+  width: 130px;
+  height: 5px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: #333333;
+  border-radius: 999px;
+
+  cursor: pointer;
+  outline: none;
+}
+
+/* Chrome / Edge / Safari */
+
+#volume-slider::-webkit-slider-runnable-track {
+  height: 5px;
+  background: var(--yellow);
+  border-radius: 999px;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 20px;
+  height: 20px;
+
+  margin-top: -7.5px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--yellow);
+
+  cursor: pointer;
+}
+
+/* Firefox */
+
+#volume-slider::-moz-range-track {
+  height: 5px;
+  background: #333333;
+  border-radius: 999px;
+}
+
+#volume-slider::-moz-range-progress {
+  height: 5px;
+  background: var(--yellow);
+  border-radius: 999px;
+}
+
+#volume-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--yellow);
+
+  cursor: pointer;
+}
+
+/* =========================
    Station card
 ========================= */
 
