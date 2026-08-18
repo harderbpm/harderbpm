@@ -8,6 +8,11 @@ const volumeSlider = document.getElementById("volume-slider");
 let currentStation = null;
 let currentStationButton = null;
 
+
+/* =========================
+   Stations laden
+========================= */
+
 fetch("stations.json")
   .then((response) => response.json())
   .then((stations) => {
@@ -40,6 +45,7 @@ fetch("stations.json")
       const stationPlayIcon = card.querySelector(".station-play-icon");
 
       stationButton.addEventListener("click", () => {
+
         if (currentStation === station && !audioPlayer.paused) {
           audioPlayer.pause();
 
@@ -51,13 +57,8 @@ fetch("stations.json")
         }
 
         if (currentStationButton && currentStationButton !== stationButton) {
-          currentStationButton
-            .querySelector(".station-play-icon")
-            .textContent = "▶";
-
-          currentStationButton
-            .querySelector("span:last-child")
-            .textContent = "Listen live";
+          currentStationButton.querySelector(".station-play-icon").textContent = "▶";
+          currentStationButton.querySelector("span:last-child").textContent = "Listen live";
         }
 
         currentStation = station;
@@ -76,7 +77,6 @@ fetch("stations.json")
           .then(() => {
             stationPlayIcon.textContent = "❚❚";
             stationButton.querySelector("span:last-child").textContent = "Pause";
-
             playerButton.textContent = "❚❚";
           })
           .catch((error) => {
@@ -93,6 +93,10 @@ fetch("stations.json")
   });
 
 
+/* =========================
+   Centrale Play / Pause
+========================= */
+
 playerButton.addEventListener("click", () => {
   if (!currentStation) {
     return;
@@ -108,13 +112,8 @@ playerButton.addEventListener("click", () => {
         playerButton.textContent = "❚❚";
 
         if (currentStationButton) {
-          currentStationButton
-            .querySelector(".station-play-icon")
-            .textContent = "❚❚";
-
-          currentStationButton
-            .querySelector("span:last-child")
-            .textContent = "Pause";
+          currentStationButton.querySelector(".station-play-icon").textContent = "❚❚";
+          currentStationButton.querySelector("span:last-child").textContent = "Pause";
         }
       })
       .catch((error) => {
@@ -127,17 +126,16 @@ playerButton.addEventListener("click", () => {
     playerButton.textContent = "▶";
 
     if (currentStationButton) {
-      currentStationButton
-        .querySelector(".station-play-icon")
-        .textContent = "▶";
-
-      currentStationButton
-        .querySelector("span:last-child")
-        .textContent = "Listen live";
+      currentStationButton.querySelector(".station-play-icon").textContent = "▶";
+      currentStationButton.querySelector("span:last-child").textContent = "Listen live";
     }
   }
 });
 
+
+/* =========================
+   Volume
+========================= */
 
 function updateVolume() {
   const volume = Number(volumeSlider.value);
