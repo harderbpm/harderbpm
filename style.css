@@ -443,10 +443,10 @@ main {
 .hero-image {
   position: absolute;
 
-  right: -45px;
+  right: -10px;
   bottom: -10px;
 
-  width: 210px;
+  width: 200px;
   height: 230px;
 
   z-index: 1;
