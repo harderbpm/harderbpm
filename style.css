@@ -219,12 +219,16 @@ main {
   gap: 14px;
 }
 
-.player-dot {
+.player-live-dot {
   width: 10px;
   height: 10px;
 
+  flex-shrink: 0;
+
   background: var(--yellow);
   border-radius: 50%;
+
+  box-shadow: 0 0 10px rgba(255, 212, 0, 0.5);
 }
 
 .player-label {
