@@ -8,6 +8,11 @@ const volumeSlider = document.getElementById("volume-slider");
 let currentStation = null;
 let currentStationButton = null;
 
+
+/* =========================
+   Stations laden
+========================= */
+
 fetch("stations.json")
   .then((response) => response.json())
   .then((stations) => {
@@ -40,35 +45,63 @@ fetch("stations.json")
       const stationPlayIcon = card.querySelector(".station-play-icon");
 
       stationButton.addEventListener("click", () => {
+
+        /* Zelfde station pauzeren */
         if (currentStation === station && !audioPlayer.paused) {
           audioPlayer.pause();
+
           stationPlayIcon.textContent = "▶";
           stationButton.querySelector("span:last-child").textContent = "Listen live";
+
           playerButton.textContent = "▶";
+
           return;
         }
 
-        if (currentStationButton && currentStationButton !== stationButton) {
-          currentStationButton.querySelector(".station-play-icon").textContent = "▶";
-          currentStationButton.querySelector("span:last-child").textContent = "Listen live";
+
+        /* Vorige stationkaart resetten */
+        if (
+          currentStationButton &&
+          currentStationButton !== stationButton
+        ) {
+          currentStationButton
+            .querySelector(".station-play-icon")
+            .textContent = "▶";
+
+          currentStationButton
+            .querySelector("span:last-child")
+            .textContent = "Listen live";
         }
 
+
+        /* Nieuwe zender instellen */
         currentStation = station;
         currentStationButton = stationButton;
 
         audioPlayer.src = station.stream;
+
         playerStationName.textContent = station.name;
         playerStationGenre.textContent = station.genre;
 
+        audioPlayer.volume = Number(volumeSlider.value);
+        audioPlayer.muted = false;
+
+
+        /* Nieuwe zender starten */
         audioPlayer
           .play()
           .then(() => {
             stationPlayIcon.textContent = "❚❚";
             stationButton.querySelector("span:last-child").textContent = "Pause";
+
             playerButton.textContent = "❚❚";
           })
           .catch((error) => {
-            console.error("Stream kon niet worden afgespeeld:", error);
+            console.error(
+              "Stream kon niet worden afgespeeld:",
+              error
+            );
+
             playerStationName.textContent = "Stream unavailable";
           });
       });
@@ -77,60 +110,73 @@ fetch("stations.json")
     });
   })
   .catch((error) => {
-    console.error("Stations konden niet worden geladen:", error);
+    console.error(
+      "Stations konden niet worden geladen:",
+      error
+    );
   });
+
+
+/* =========================
+   Centrale Play / Pause
+========================= */
 
 playerButton.addEventListener("click", () => {
   if (!currentStation) {
     return;
   }
 
-if (audioPlayer.paused) {
 
-  audioPlayer.volume = Number(volumeSlider.value);
-  audioPlayer.muted = false;
+  /* Hervatten */
+  if (audioPlayer.paused) {
+    audioPlayer.volume = Number(volumeSlider.value);
+    audioPlayer.muted = false;
 
-  audioPlayer
-    .play()
-    .then(() => {
-      playerButton.textContent = "❚❚";
-
-      if (currentStationButton) {
-        currentStationButton.querySelector(".station-play-icon").textContent = "❚❚";
-        currentStationButton.querySelector("span:last-child").textContent = "Pause";
-      }
-    })
-    .catch((error) => {
-      console.error("Stream kon niet worden hervat:", error);
-    });
-}
-
-audioPlayer.volume = Number(volumeSlider.value);
-audioPlayer.muted = false;
-
-audioPlayer
-  .play()
+    audioPlayer
+      .play()
       .then(() => {
         playerButton.textContent = "❚❚";
 
         if (currentStationButton) {
-          currentStationButton.querySelector(".station-play-icon").textContent = "❚❚";
-          currentStationButton.querySelector("span:last-child").textContent = "Pause";
+          currentStationButton
+            .querySelector(".station-play-icon")
+            .textContent = "❚❚";
+
+          currentStationButton
+            .querySelector("span:last-child")
+            .textContent = "Pause";
         }
       })
       .catch((error) => {
-        console.error("Stream kon niet worden hervat:", error);
+        console.error(
+          "Stream kon niet worden hervat:",
+          error
+        );
       });
+
   } else {
+
+    /* Pauzeren */
     audioPlayer.pause();
+
     playerButton.textContent = "▶";
 
     if (currentStationButton) {
-      currentStationButton.querySelector(".station-play-icon").textContent = "▶";
-      currentStationButton.querySelector("span:last-child").textContent = "Listen live";
+      currentStationButton
+        .querySelector(".station-play-icon")
+        .textContent = "▶";
+
+      currentStationButton
+        .querySelector("span:last-child")
+        .textContent = "Listen live";
     }
   }
 });
+
+
+/* =========================
+   Volume
+========================= */
 
 function updateVolume() {
   const volume = Number(volumeSlider.value);
@@ -139,8 +185,12 @@ function updateVolume() {
   audioPlayer.volume = volume;
 }
 
+
+/* Start standaard op 50% */
 volumeSlider.value = 0.5;
 audioPlayer.volume = 0.5;
 
+
+/* Volume tijdens slepen én na loslaten */
 volumeSlider.addEventListener("input", updateVolume);
 volumeSlider.addEventListener("change", updateVolume);
