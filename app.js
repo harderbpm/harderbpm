@@ -167,6 +167,8 @@ fetch("stations.json")
           stationPlayIcon.textContent = "▶";
           stationButton.querySelector("span:last-child").textContent = "Listen live";
 
+          card.classList.remove("is-playing");
+
           setPlayerIcon(false);
 
           return;
