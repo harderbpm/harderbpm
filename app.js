@@ -198,11 +198,19 @@ fetch("stations.json")
         audioPlayer
           .play()
           .then(() => {
-            stationPlayIcon.textContent = "❚❚";
-            stationButton.querySelector("span:last-child").textContent = "Pause";
+  document
+    .querySelectorAll(".station-card")
+    .forEach((stationCard) => {
+      stationCard.classList.remove("is-playing");
+    });
 
-            setPlayerIcon(true);
-          })
+  card.classList.add("is-playing");
+
+  stationPlayIcon.textContent = "❚❚";
+  stationButton.querySelector("span:last-child").textContent = "Pause";
+
+  setPlayerIcon(true);
+})
           .catch((error) => {
             console.error("Stream kon niet worden afgespeeld:", error);
             playerStationName.textContent = "Stream unavailable";
