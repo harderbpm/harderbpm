@@ -7,6 +7,34 @@ const volumeSlider = document.getElementById("volume-slider");
 
 let currentStation = null;
 let currentStationButton = null;
+let currentStationCard = null;
+
+
+/* =========================
+   Player icons
+========================= */
+
+const playIcon = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M8 5.5L18 12L8 18.5V5.5Z"></path>
+  </svg>
+`;
+
+const pauseIcon = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="7" y="5" width="3.5" height="14" rx="1"></rect>
+    <rect x="13.5" y="5" width="3.5" height="14" rx="1"></rect>
+  </svg>
+`;
+
+function setPlayerIcon(isPlaying) {
+  playerButton.innerHTML = isPlaying ? pauseIcon : playIcon;
+}
+
+
+/* =========================
+   Genre icons
+========================= */
 
 function getGenreIcon(genre, shortName) {
   switch (genre.toLowerCase()) {
@@ -95,7 +123,6 @@ function getGenreIcon(genre, shortName) {
                    Z"></path>
 
           <rect x="46" y="52" width="8" height="35" rx="3"></rect>
-
           <path d="M35 75 H65 V82 H35 Z"></path>
         </svg>
       `;
@@ -105,21 +132,34 @@ function getGenreIcon(genre, shortName) {
   }
 }
 
-const playIcon = `
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M8 5.5L18 12L8 18.5V5.5Z"></path>
-  </svg>
-`;
 
-const pauseIcon = `
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="7" y="5" width="3.5" height="14" rx="1"></rect>
-    <rect x="13.5" y="5" width="3.5" height="14" rx="1"></rect>
-  </svg>
-`;
+/* =========================
+   Station status
+========================= */
 
-function setPlayerIcon(isPlaying) {
-  playerButton.innerHTML = isPlaying ? pauseIcon : playIcon;
+function clearPlayingState() {
+  document
+    .querySelectorAll(".station-card")
+    .forEach((card) => {
+      card.classList.remove("is-playing");
+    });
+}
+
+function setStationButtonPlaying(button, isPlaying) {
+  if (!button) {
+    return;
+  }
+
+  const icon = button.querySelector(".station-play-icon");
+  const text = button.querySelector("span:last-child");
+
+  if (isPlaying) {
+    icon.textContent = "❚❚";
+    text.textContent = "Pause";
+  } else {
+    icon.textContent = "▶";
+    text.textContent = "Listen live";
+  }
 }
 
 
@@ -130,7 +170,9 @@ function setPlayerIcon(isPlaying) {
 fetch("stations.json")
   .then((response) => response.json())
   .then((stations) => {
+
     stations.forEach((station) => {
+
       const card = document.createElement("article");
       card.className = "station-card";
 
@@ -141,14 +183,16 @@ fetch("stations.json")
         </div>
 
         <div class="station-card-content">
+
           <div class="station-icon">
-          ${getGenreIcon(station.genre, station.shortName)}
+            ${getGenreIcon(station.genre, station.shortName)}
           </div>
 
           <div>
             <h3>${station.name}</h3>
             <p>${station.genre} radio</p>
           </div>
+
         </div>
 
         <button class="station-play-button" type="button">
@@ -157,16 +201,20 @@ fetch("stations.json")
         </button>
       `;
 
-      const stationButton = card.querySelector(".station-play-button");
-      const stationPlayIcon = card.querySelector(".station-play-icon");
+      const stationButton =
+        card.querySelector(".station-play-button");
+
 
       stationButton.addEventListener("click", () => {
-        if (currentStation === station && !audioPlayer.paused) {
+
+        /* Zelfde station pauzeren */
+        if (
+          currentStation === station &&
+          !audioPlayer.paused
+        ) {
           audioPlayer.pause();
 
-          stationPlayIcon.textContent = "▶";
-          stationButton.querySelector("span:last-child").textContent = "Listen live";
-
+          setStationButtonPlaying(stationButton, false);
           card.classList.remove("is-playing");
 
           setPlayerIcon(false);
@@ -174,54 +222,84 @@ fetch("stations.json")
           return;
         }
 
-        if (currentStationButton && currentStationButton !== stationButton) {
-          currentStationButton
-            .querySelector(".station-play-icon")
-            .textContent = "▶";
 
-          currentStationButton
-            .querySelector("span:last-child")
-            .textContent = "Listen live";
+        /* Vorige station resetten */
+        if (
+          currentStationButton &&
+          currentStationButton !== stationButton
+        ) {
+          setStationButtonPlaying(
+            currentStationButton,
+            false
+          );
         }
 
+        clearPlayingState();
+
+
+        /* Nieuwe station instellen */
         currentStation = station;
         currentStationButton = stationButton;
+        currentStationCard = card;
 
         audioPlayer.src = station.stream;
 
         playerStationName.textContent = station.name;
         playerStationGenre.textContent = station.genre;
 
-        audioPlayer.volume = Number(volumeSlider.value);
+        audioPlayer.volume =
+          Number(volumeSlider.value);
+
         audioPlayer.muted = false;
 
+
+        /* Station starten */
         audioPlayer
           .play()
           .then(() => {
-  document
-    .querySelectorAll(".station-card")
-    .forEach((stationCard) => {
-      stationCard.classList.remove("is-playing");
-    });
 
-  card.classList.add("is-playing");
+            card.classList.add("is-playing");
 
-  stationPlayIcon.textContent = "❚❚";
-  stationButton.querySelector("span:last-child").textContent = "Pause";
+            setStationButtonPlaying(
+              stationButton,
+              true
+            );
 
-  setPlayerIcon(true);
-})
+            setPlayerIcon(true);
+          })
           .catch((error) => {
-            console.error("Stream kon niet worden afgespeeld:", error);
-            playerStationName.textContent = "Stream unavailable";
+
+            console.error(
+              "Stream kon niet worden afgespeeld:",
+              error
+            );
+
+            playerStationName.textContent =
+              "Stream unavailable";
+
+            card.classList.remove("is-playing");
+
+            setStationButtonPlaying(
+              stationButton,
+              false
+            );
+
+            setPlayerIcon(false);
           });
       });
 
+
       stationList.appendChild(card);
     });
+
   })
   .catch((error) => {
-    console.error("Stations konden niet worden geladen:", error);
+
+    console.error(
+      "Stations konden niet worden geladen:",
+      error
+    );
+
   });
 
 
@@ -230,47 +308,66 @@ fetch("stations.json")
 ========================= */
 
 playerButton.addEventListener("click", () => {
+
   if (!currentStation) {
     return;
   }
 
+
+  /* Hervatten */
   if (audioPlayer.paused) {
-    audioPlayer.volume = Number(volumeSlider.value);
+
+    audioPlayer.volume =
+      Number(volumeSlider.value);
+
     audioPlayer.muted = false;
 
     audioPlayer
       .play()
       .then(() => {
+
         setPlayerIcon(true);
 
-        if (currentStationButton) {
-          currentStationButton
-            .querySelector(".station-play-icon")
-            .textContent = "❚❚";
-
-          currentStationButton
-            .querySelector("span:last-child")
-            .textContent = "Pause";
+        if (currentStationCard) {
+          clearPlayingState();
+          currentStationCard.classList.add(
+            "is-playing"
+          );
         }
+
+        setStationButtonPlaying(
+          currentStationButton,
+          true
+        );
+
       })
       .catch((error) => {
-        console.error("Stream kon niet worden hervat:", error);
+
+        console.error(
+          "Stream kon niet worden hervat:",
+          error
+        );
+
       });
 
+
   } else {
+
+    /* Pauzeren */
     audioPlayer.pause();
 
     setPlayerIcon(false);
 
-    if (currentStationButton) {
-      currentStationButton
-        .querySelector(".station-play-icon")
-        .textContent = "▶";
-
-      currentStationButton
-        .querySelector("span:last-child")
-        .textContent = "Listen live";
+    if (currentStationCard) {
+      currentStationCard.classList.remove(
+        "is-playing"
+      );
     }
+
+    setStationButtonPlaying(
+      currentStationButton,
+      false
+    );
   }
 });
 
@@ -280,17 +377,28 @@ playerButton.addEventListener("click", () => {
 ========================= */
 
 function updateVolume() {
-  const volume = Number(volumeSlider.value);
+
+  const volume =
+    Number(volumeSlider.value);
 
   audioPlayer.muted = false;
   audioPlayer.volume = volume;
 }
 
+
+/* Start op 50% */
 volumeSlider.value = 0.5;
 audioPlayer.volume = 0.5;
 
-volumeSlider.addEventListener("input", updateVolume);
-volumeSlider.addEventListener("change", updateVolume);
+volumeSlider.addEventListener(
+  "input",
+  updateVolume
+);
+
+volumeSlider.addEventListener(
+  "change",
+  updateVolume
+);
 
 
 /* Start met play-icoon */
