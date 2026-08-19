@@ -697,6 +697,15 @@ main {
   width: 90px;
 }
 
+   /* Nuclear symbool groter op mobiel */
+#volume-slider::-webkit-slider-thumb {
+  background-size: 25px 25px;
+}
+
+#volume-slider::-moz-range-thumb {
+  background-size: 22px 22px;
+}
+
 /* =========================
    Tablet Hero
 ========================= */
