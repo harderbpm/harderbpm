@@ -551,8 +551,11 @@ main {
   height: 46px;
 
   fill: var(--yellow);
-
   display: block;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255, 212, 0, 0.65))
+    drop-shadow(0 0 10px rgba(255, 212, 0, 0.25));
 }
 
 .station-card-content > div:last-child {
