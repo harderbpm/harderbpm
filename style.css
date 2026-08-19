@@ -265,19 +265,53 @@ main {
 }
 
 .player-button {
-  width: 54px;
-  height: 54px;
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
 
   border-radius: 50%;
+  border: 2px solid var(--yellow);
 
-  border: 1px solid var(--yellow);
+  background: linear-gradient(
+    145deg,
+    #181818,
+    #080808
+  );
 
-  background: transparent;
   color: var(--yellow);
 
-  font-size: 19px;
+  font-size: 20px;
+  font-weight: 900;
 
   cursor: pointer;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 212, 0, 0.06),
+    0 0 14px rgba(255, 212, 0, 0.22);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.player-button:hover {
+  background: #151515;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 212, 0, 0.10),
+    0 0 20px rgba(255, 212, 0, 0.38);
+
+  transform: scale(1.05);
+}
+
+.player-button:active {
+  transform: scale(0.96);
 }
 
 /* =========================
