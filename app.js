@@ -36,6 +36,70 @@ function getGenreIcon(genre, shortName) {
         </svg>
       `;
 
+    case "hardstyle":
+      return `
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M58 6
+                   L28 50
+                   H47
+                   L35 94
+                   L72 43
+                   H52
+                   Z"></path>
+        </svg>
+      `;
+
+    case "uptempo":
+      return `
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M40 8
+                   L18 49
+                   H34
+                   L24 91
+                   L53 48
+                   H39
+                   L55 8
+                   Z"></path>
+
+          <path d="M72 8
+                   L50 49
+                   H66
+                   L56 91
+                   L85 48
+                   H71
+                   L87 8
+                   Z"></path>
+        </svg>
+      `;
+
+    case "frenchcore":
+      return `
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M50 8
+                   C42 20 38 28 38 36
+                   C38 44 44 48 50 52
+                   C56 48 62 44 62 36
+                   C62 28 58 20 50 8
+                   Z"></path>
+
+          <path d="M50 52
+                   C42 45 30 40 22 46
+                   C12 54 18 70 32 68
+                   C24 63 26 54 35 55
+                   C41 56 45 62 47 68
+                   H53
+                   C55 62 59 56 65 55
+                   C74 54 76 63 68 68
+                   C82 70 88 54 78 46
+                   C70 40 58 45 50 52
+                   Z"></path>
+
+          <rect x="46" y="52" width="8" height="35" rx="3"></rect>
+
+          <path d="M35 75 H65 V82 H35 Z"></path>
+        </svg>
+      `;
+
     default:
       return shortName;
   }
