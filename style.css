@@ -508,6 +508,54 @@ main {
   border-radius: 4px;
 }
 
+/* =========================
+   Station status
+========================= */
+
+.station-badge.status-online {
+  background: var(--yellow);
+  color: #000;
+  border: 1px solid var(--yellow);
+}
+
+.station-badge.status-unstable {
+  background: #080808;
+  color: var(--yellow);
+  border: 1px solid var(--yellow);
+
+  box-shadow:
+    0 0 10px rgba(255, 212, 0, 0.18);
+}
+
+.station-badge.status-offline {
+  background: #080808;
+  color: #ff3b30;
+  border: 1px solid #ff3b30;
+
+  box-shadow:
+    0 0 10px rgba(255, 59, 48, 0.20);
+}
+
+.station-card.is-offline {
+  border-color: rgba(255, 59, 48, 0.45);
+}
+
+.station-card.is-offline .station-play-button {
+  background: #080808;
+  color: #ff3b30;
+
+  border: 1px solid #ff3b30;
+
+  box-shadow: none;
+
+  cursor: not-allowed;
+}
+
+.station-card.is-offline .station-play-button:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .station-genre {
   color: var(--muted);
 
