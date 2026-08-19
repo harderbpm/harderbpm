@@ -5,6 +5,9 @@ const playerStationName = document.getElementById("player-station-name");
 const playerStationGenre = document.getElementById("player-station-genre");
 const volumeSlider = document.getElementById("volume-slider");
 
+const statusApi =
+  "https://harderbpm-stream-status.robbertinlog.workers.dev";
+
 let currentStation = null;
 let currentStationButton = null;
 let currentStationCard = null;
@@ -28,7 +31,8 @@ const pauseIcon = `
 `;
 
 function setPlayerIcon(isPlaying) {
-  playerButton.innerHTML = isPlaying ? pauseIcon : playIcon;
+  playerButton.innerHTML =
+    isPlaying ? pauseIcon : playIcon;
 }
 
 
@@ -122,7 +126,14 @@ function getGenreIcon(genre, shortName) {
                    C70 40 58 45 50 52
                    Z"></path>
 
-          <rect x="46" y="52" width="8" height="35" rx="3"></rect>
+          <rect
+            x="46"
+            y="52"
+            width="8"
+            height="35"
+            rx="3"
+          ></rect>
+
           <path d="M35 75 H65 V82 H35 Z"></path>
         </svg>
       `;
@@ -134,7 +145,7 @@ function getGenreIcon(genre, shortName) {
 
 
 /* =========================
-   Station status
+   Station status helpers
 ========================= */
 
 function clearPlayingState() {
@@ -145,13 +156,19 @@ function clearPlayingState() {
     });
 }
 
-function setStationButtonPlaying(button, isPlaying) {
+function setStationButtonPlaying(
+  button,
+  isPlaying
+) {
   if (!button) {
     return;
   }
 
-  const icon = button.querySelector(".station-play-icon");
-  const text = button.querySelector("span:last-child");
+  const icon =
+    button.querySelector(".station-play-icon");
+
+  const text =
+    button.querySelector("span:last-child");
 
   if (isPlaying) {
     icon.textContent = "❚❚";
@@ -159,6 +176,119 @@ function setStationButtonPlaying(button, isPlaying) {
   } else {
     icon.textContent = "▶";
     text.textContent = "Listen live";
+  }
+}
+
+
+/* =========================
+   Worker status ophalen
+========================= */
+
+async function loadStationStatus() {
+  try {
+    const response = await fetch(statusApi);
+
+    if (!response.ok) {
+      throw new Error(
+        `Status API error: ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+
+    data.stations.forEach((stationStatus) => {
+      const card =
+        document.querySelector(
+          `.station-card[data-station="${CSS.escape(
+            stationStatus.station
+          )}"]`
+        );
+
+      if (!card) {
+        return;
+      }
+
+      const badge =
+        card.querySelector(".station-badge");
+
+      const button =
+        card.querySelector(
+          ".station-play-button"
+        );
+
+      badge.classList.remove(
+        "status-online",
+        "status-unstable",
+        "status-offline"
+      );
+
+      card.classList.remove("is-offline");
+
+      button.disabled = false;
+
+
+      /* ONLINE */
+      if (stationStatus.status === "online") {
+        badge.textContent = "ONLINE";
+        badge.classList.add("status-online");
+
+        if (
+          currentStationCard !== card ||
+          audioPlayer.paused
+        ) {
+          button.disabled = false;
+        }
+      }
+
+
+      /* UNSTABLE */
+      else if (
+        stationStatus.status === "unstable"
+      ) {
+        badge.textContent = "UNSTABLE";
+
+        badge.classList.add(
+          "status-unstable"
+        );
+
+        button.disabled = false;
+      }
+
+
+      /* OFFLINE */
+      else if (
+        stationStatus.status === "offline"
+      ) {
+        badge.textContent = "OFFLINE";
+
+        badge.classList.add(
+          "status-offline"
+        );
+
+        card.classList.add("is-offline");
+
+        button.disabled = true;
+
+        const icon =
+          button.querySelector(
+            ".station-play-icon"
+          );
+
+        const text =
+          button.querySelector(
+            "span:last-child"
+          );
+
+        icon.textContent = "⚠";
+        text.textContent = "Station offline";
+      }
+    });
+
+  } catch (error) {
+    console.error(
+      "Station status kon niet worden geladen:",
+      error
+    );
   }
 }
 
@@ -173,19 +303,33 @@ fetch("stations.json")
 
     stations.forEach((station) => {
 
-      const card = document.createElement("article");
+      const card =
+        document.createElement("article");
+
       card.className = "station-card";
+
+      card.dataset.station = station.name;
 
       card.innerHTML = `
         <div class="station-card-top">
-          <div class="station-badge">LIVE</div>
-          <div class="station-genre">${station.genre}</div>
+
+          <div class="station-badge status-online">
+            ONLINE
+          </div>
+
+          <div class="station-genre">
+            ${station.genre}
+          </div>
+
         </div>
 
         <div class="station-card-content">
 
           <div class="station-icon">
-            ${getGenreIcon(station.genre, station.shortName)}
+            ${getGenreIcon(
+              station.genre,
+              station.shortName
+            )}
           </div>
 
           <div>
@@ -195,102 +339,139 @@ fetch("stations.json")
 
         </div>
 
-        <button class="station-play-button" type="button">
-          <span class="station-play-icon">▶</span>
+        <button
+          class="station-play-button"
+          type="button"
+        >
+          <span class="station-play-icon">
+            ▶
+          </span>
+
           <span>Listen live</span>
         </button>
       `;
 
       const stationButton =
-        card.querySelector(".station-play-button");
+        card.querySelector(
+          ".station-play-button"
+        );
 
 
-      stationButton.addEventListener("click", () => {
+      stationButton.addEventListener(
+        "click",
+        () => {
 
-        /* Zelfde station pauzeren */
-        if (
-          currentStation === station &&
-          !audioPlayer.paused
-        ) {
-          audioPlayer.pause();
-
-          setStationButtonPlaying(stationButton, false);
-          card.classList.remove("is-playing");
-
-          setPlayerIcon(false);
-
-          return;
-        }
+          if (stationButton.disabled) {
+            return;
+          }
 
 
-        /* Vorige station resetten */
-        if (
-          currentStationButton &&
-          currentStationButton !== stationButton
-        ) {
-          setStationButtonPlaying(
-            currentStationButton,
-            false
-          );
-        }
-
-        clearPlayingState();
-
-
-        /* Nieuwe station instellen */
-        currentStation = station;
-        currentStationButton = stationButton;
-        currentStationCard = card;
-
-        audioPlayer.src = station.stream;
-
-        playerStationName.textContent = station.name;
-        playerStationGenre.textContent = station.genre;
-
-        audioPlayer.volume =
-          Number(volumeSlider.value);
-
-        audioPlayer.muted = false;
-
-
-        /* Station starten */
-        audioPlayer
-          .play()
-          .then(() => {
-
-            card.classList.add("is-playing");
-
-            setStationButtonPlaying(
-              stationButton,
-              true
-            );
-
-            setPlayerIcon(true);
-          })
-          .catch((error) => {
-
-            console.error(
-              "Stream kon niet worden afgespeeld:",
-              error
-            );
-
-            playerStationName.textContent =
-              "Stream unavailable";
-
-            card.classList.remove("is-playing");
+          /* Zelfde station pauzeren */
+          if (
+            currentStation === station &&
+            !audioPlayer.paused
+          ) {
+            audioPlayer.pause();
 
             setStationButtonPlaying(
               stationButton,
               false
             );
 
+            card.classList.remove(
+              "is-playing"
+            );
+
             setPlayerIcon(false);
-          });
-      });
+
+            return;
+          }
+
+
+          /* Vorige station resetten */
+          if (
+            currentStationButton &&
+            currentStationButton !==
+              stationButton
+          ) {
+            setStationButtonPlaying(
+              currentStationButton,
+              false
+            );
+          }
+
+          clearPlayingState();
+
+
+          /* Nieuwe station instellen */
+          currentStation = station;
+
+          currentStationButton =
+            stationButton;
+
+          currentStationCard = card;
+
+          audioPlayer.src = station.stream;
+
+          playerStationName.textContent =
+            station.name;
+
+          playerStationGenre.textContent =
+            station.genre;
+
+          audioPlayer.volume =
+            Number(volumeSlider.value);
+
+          audioPlayer.muted = false;
+
+
+          /* Station starten */
+          audioPlayer
+            .play()
+            .then(() => {
+
+              card.classList.add(
+                "is-playing"
+              );
+
+              setStationButtonPlaying(
+                stationButton,
+                true
+              );
+
+              setPlayerIcon(true);
+            })
+            .catch((error) => {
+
+              console.error(
+                "Stream kon niet worden afgespeeld:",
+                error
+              );
+
+              playerStationName.textContent =
+                "Stream unavailable";
+
+              card.classList.remove(
+                "is-playing"
+              );
+
+              setStationButtonPlaying(
+                stationButton,
+                false
+              );
+
+              setPlayerIcon(false);
+            });
+        }
+      );
 
 
       stationList.appendChild(card);
     });
+
+
+    /* Pas status ophalen nadat kaarten bestaan */
+    loadStationStatus();
 
   })
   .catch((error) => {
@@ -307,69 +488,73 @@ fetch("stations.json")
    Centrale Play / Pause
 ========================= */
 
-playerButton.addEventListener("click", () => {
+playerButton.addEventListener(
+  "click",
+  () => {
 
-  if (!currentStation) {
-    return;
-  }
-
-
-  /* Hervatten */
-  if (audioPlayer.paused) {
-
-    audioPlayer.volume =
-      Number(volumeSlider.value);
-
-    audioPlayer.muted = false;
-
-    audioPlayer
-      .play()
-      .then(() => {
-
-        setPlayerIcon(true);
-
-        if (currentStationCard) {
-          clearPlayingState();
-          currentStationCard.classList.add(
-            "is-playing"
-          );
-        }
-
-        setStationButtonPlaying(
-          currentStationButton,
-          true
-        );
-
-      })
-      .catch((error) => {
-
-        console.error(
-          "Stream kon niet worden hervat:",
-          error
-        );
-
-      });
-
-
-  } else {
-
-    /* Pauzeren */
-    audioPlayer.pause();
-
-    setPlayerIcon(false);
-
-    if (currentStationCard) {
-      currentStationCard.classList.remove(
-        "is-playing"
-      );
+    if (!currentStation) {
+      return;
     }
 
-    setStationButtonPlaying(
-      currentStationButton,
-      false
-    );
+
+    /* Hervatten */
+    if (audioPlayer.paused) {
+
+      audioPlayer.volume =
+        Number(volumeSlider.value);
+
+      audioPlayer.muted = false;
+
+      audioPlayer
+        .play()
+        .then(() => {
+
+          setPlayerIcon(true);
+
+          if (currentStationCard) {
+            clearPlayingState();
+
+            currentStationCard.classList.add(
+              "is-playing"
+            );
+          }
+
+          setStationButtonPlaying(
+            currentStationButton,
+            true
+          );
+
+        })
+        .catch((error) => {
+
+          console.error(
+            "Stream kon niet worden hervat:",
+            error
+          );
+
+        });
+
+
+    } else {
+
+      /* Pauzeren */
+      audioPlayer.pause();
+
+      setPlayerIcon(false);
+
+      if (currentStationCard) {
+        currentStationCard.classList.remove(
+          "is-playing"
+        );
+      }
+
+      setStationButtonPlaying(
+        currentStationButton,
+        false
+      );
+    }
   }
-});
+);
 
 
 /* =========================
@@ -377,7 +562,6 @@ playerButton.addEventListener("click", () => {
 ========================= */
 
 function updateVolume() {
-
   const volume =
     Number(volumeSlider.value);
 
