@@ -8,6 +8,39 @@ const volumeSlider = document.getElementById("volume-slider");
 let currentStation = null;
 let currentStationButton = null;
 
+function getGenreIcon(genre, shortName) {
+  switch (genre.toLowerCase()) {
+
+    case "hardcore":
+      return `
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="8"></circle>
+
+          <path d="M50 10
+                   A40 40 0 0 1 84 30
+                   L63 42
+                   A17 17 0 0 0 50 33
+                   Z"></path>
+
+          <path d="M84 70
+                   A40 40 0 0 1 50 90
+                   L50 66
+                   A17 17 0 0 0 63 58
+                   Z"></path>
+
+          <path d="M16 70
+                   A40 40 0 0 1 16 30
+                   L37 42
+                   A17 17 0 0 0 37 58
+                   Z"></path>
+        </svg>
+      `;
+
+    default:
+      return shortName;
+  }
+}
+
 const playIcon = `
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M8 5.5L18 12L8 18.5V5.5Z"></path>
@@ -44,7 +77,9 @@ fetch("stations.json")
         </div>
 
         <div class="station-card-content">
-          <div class="station-icon">${station.shortName}</div>
+          <div class="station-icon">
+          ${getGenreIcon(station.genre, station.shortName)}
+          </div>
 
           <div>
             <h3>${station.name}</h3>
