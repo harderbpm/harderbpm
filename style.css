@@ -580,16 +580,69 @@ main {
     padding-top: 38px;
   }
 
-  .player {
-    min-height: 78px;
-    padding: 12px 18px;
-  }
+.player {
+  min-height: 110px;
+  padding: 14px 18px;
 
-  .player-button {
-    width: 48px;
-    height: 48px;
-  }
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 18px;
+}
 
+.player-info {
+  min-width: 0;
+  gap: 12px;
+}
+
+.player-text {
+  min-width: 0;
+}
+
+.player-live-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.player-label {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+
+#player-station-name {
+  font-size: 17px;
+  line-height: 1.05;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-genre {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.player-button {
+  width: 54px;
+  height: 54px;
+  font-size: 19px;
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-icon {
+  width: 20px;
+  height: 20px;
+}
+
+#volume-slider {
+  width: 90px;
 }
 
 /* =========================
