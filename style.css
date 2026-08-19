@@ -546,6 +546,15 @@ main {
   font-weight: 900;
 }
 
+.station-icon svg {
+  width: 46px;
+  height: 46px;
+
+  fill: var(--yellow);
+
+  display: block;
+}
+
 .station-card-content > div:last-child {
   min-width: 0;
 }
