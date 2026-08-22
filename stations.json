@@ -18,12 +18,12 @@
     "description": "24/7 hardstyle radio",
     "stream": "https://hardstylefm.stream.laut.fm/hardstylefm"
   },
-  {
-  "name": "Techno Radio Hard Techno",
-  "shortName": "TR",
+ {
+  "name": "sunshine live - Schranz",
+  "shortName": "SSL",
   "genre": "Hard Techno",
-  "description": "24/7 Hard Techno",
-  "stream": "https://conjy.com:8042/stream4.mp3"
+  "description": "Hard Techno & Schranz",
+  "stream": "https://stream.sunshine-live.de/schranz/mp3-192"
 },
   {
   "name": "SkellyWays Radio",
