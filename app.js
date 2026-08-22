@@ -68,6 +68,7 @@ function getGenreIcon(genre, shortName) {
         </svg>
       `;
 
+
     case "hardstyle":
       return `
         <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -80,6 +81,7 @@ function getGenreIcon(genre, shortName) {
                    Z"></path>
         </svg>
       `;
+
 
     case "uptempo":
       return `
@@ -103,6 +105,7 @@ function getGenreIcon(genre, shortName) {
                    Z"></path>
         </svg>
       `;
+
 
     case "frenchcore":
       return `
@@ -137,6 +140,67 @@ function getGenreIcon(genre, shortName) {
           <path d="M35 75 H65 V82 H35 Z"></path>
         </svg>
       `;
+
+
+    case "hard techno":
+      return `
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+
+          <!-- Tandwiel -->
+          <path d="
+            M44 8 H56
+            L59 18
+            C63 19 67 21 70 23
+            L79 18
+            L87 27
+            L82 36
+            C84 40 86 44 86 48
+            L96 52
+            L94 64
+            L83 65
+            C81 69 79 73 76 76
+            L81 86
+            L71 93
+            L63 86
+            C59 88 55 89 51 89
+            L47 99
+            L35 96
+            L35 85
+            C31 83 27 81 24 78
+            L14 82
+            L7 72
+            L14 64
+            C12 60 11 56 11 52
+            L1 47
+            L5 35
+            L16 35
+            C18 31 20 27 23 24
+            L18 14
+            L28 7
+            L36 15
+            C39 12 42 10 44 8
+            Z
+
+            M50 30
+            A20 20 0 1 0 50 70
+            A20 20 0 1 0 50 30
+            Z
+          " fill-rule="evenodd"></path>
+
+          <!-- Bliksem -->
+          <path d="
+            M56 24
+            L37 52
+            H48
+            L42 77
+            L65 45
+            H54
+            Z
+          "></path>
+
+        </svg>
+      `;
+
 
     default:
       return shortName;
