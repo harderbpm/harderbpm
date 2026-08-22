@@ -19,11 +19,11 @@
     "stream": "https://hardstylefm.stream.laut.fm/hardstylefm"
   },
   {
-  "name": "Uptempo Banger",
-  "shortName": "UB",
-  "genre": "Uptempo",
-  "description": "Uptempo hardcore",
-  "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/MASTERSOFHARDCORE.mp3"
+  "name": "Techno Radio Hard Techno",
+  "shortName": "TR",
+  "genre": "Hard Techno",
+  "description": "24/7 Hard Techno",
+  "stream": "https://conjy.com:8042/stream4.mp3"
 },
   {
   "name": "SkellyWays Radio",
