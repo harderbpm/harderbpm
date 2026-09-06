@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-  <!-- Google Consent Mode -->
+<!-- Google Consent Mode -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -13,6 +13,14 @@
     'ad_user_data': 'denied',
     'ad_personalization': 'denied'
   });
+
+  const harderbpmConsent = localStorage.getItem('harderbpm-cookie-consent');
+
+  if (harderbpmConsent === 'accepted') {
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted'
+    });
+  }
 </script>
 
 <!-- Google tag (gtag.js) -->
