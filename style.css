@@ -1046,3 +1046,25 @@ main {
     flex: 1;
   }
 }
+
+/* =========================
+   Footer
+========================= */
+
+.site-footer {
+  padding: 30px 20px 110px;
+  text-align: center;
+}
+
+.site-footer a {
+  color: #777;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.site-footer a:hover {
+  color: var(--yellow);
+}
