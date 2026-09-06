@@ -1068,3 +1068,22 @@ main {
 .site-footer a:hover {
   color: var(--yellow);
 }
+
+/* Cookie privacy link */
+
+.cookie-privacy-link {
+  display: inline-block;
+  margin-top: 6px;
+
+  color: var(--yellow);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-privacy-link:hover {
+  color: #ffffff;
+}
