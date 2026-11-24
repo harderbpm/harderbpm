@@ -1,15 +1,442 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>HarderBPM 2.0</title>
-</head>
-<body style="background: #080808; color: #ffd400; text-align: center; font-family: Arial; padding: 50px;">
 
-  <h1>HARDERBPM 2.0</h1>
-  <p>Under development</p>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <!-- Development version: do not index -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>HarderBPM - Feel the Harder Styles</title>
+
+  <meta name="description"
+        content="Your gateway to Hardcore, Hardstyle, Uptempo, Frenchcore and Hard Techno radio.">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png"
+        sizes="32x32" href="/favicon-32x32.png">
+
+  <link rel="apple-touch-icon"
+        href="/apple-touch-icon.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="site-header">
+
+    <div class="header-container">
+
+      <a href="#home" class="brand">
+        <img src="/harderbpm-logo.png"
+             alt="HarderBPM">
+      </a>
+
+      <nav class="main-navigation"
+           aria-label="Main navigation">
+
+        <a href="#home" class="nav-link active">
+          Home
+        </a>
+
+        <a href="#genres" class="nav-link">
+          Genres
+        </a>
+
+        <a href="#events" class="nav-link">
+          Events
+        </a>
+
+      </nav>
+
+      <button class="mobile-menu-button"
+              id="mobile-menu-button"
+              type="button"
+              aria-label="Open menu"
+              aria-expanded="false">
+        ☰
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       DYNAMIC PAGE CONTENT
+  ========================== -->
+
+  <main id="page-content">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+
+        <span class="hero-label">
+          THE HARDER STYLES RADIO PLATFORM
+        </span>
+
+        <h1>
+          FEEL THE<br>
+          <span>HARDER STYLES</span>
+        </h1>
+
+        <p>
+          One place. The hardest sounds. Live.
+        </p>
+
+        <a href="#live-radio"
+           class="primary-button">
+          START LISTENING
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- LIVE RADIO -->
+
+    <section class="content-section"
+             id="live-radio">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-label">
+            TUNE IN
+          </span>
+
+          <h2>LIVE RADIO</h2>
+        </div>
+
+        <span class="live-indicator">
+          ● LIVE 24/7
+        </span>
+
+      </div>
+
+      <div class="station-grid"
+           id="station-list">
+
+        <p>Loading radio stations...</p>
+
+      </div>
+
+    </section>
+
+
+    <!-- GENRES -->
+
+    <section class="content-section"
+             id="genres">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-label">
+            FIND YOUR SOUND
+          </span>
+
+          <h2>EXPLORE THE HARDER STYLES</h2>
+        </div>
+
+      </div>
+
+      <div class="genre-grid">
+
+        <a href="#hardcore"
+           class="genre-card genre-hardcore">
+
+          <div class="genre-symbol">☣</div>
+
+          <h3>HARDCORE</h3>
+
+          <p>Raw kicks. Relentless energy.</p>
+
+          <span class="genre-link">
+            EXPLORE →
+          </span>
+
+        </a>
+
+
+        <a href="#hardstyle"
+           class="genre-card genre-hardstyle">
+
+          <div class="genre-symbol">ϟ</div>
+
+          <h3>HARDSTYLE</h3>
+
+          <p>Melody meets power.</p>
+
+          <span class="genre-link">
+            EXPLORE →
+          </span>
+
+        </a>
+
+
+        <a href="#uptempo"
+           class="genre-card genre-uptempo">
+
+          <div class="genre-symbol">ϟϟ</div>
+
+          <h3>UPTEMPO</h3>
+
+          <p>Maximum BPM.</p>
+
+          <span class="genre-link">
+            EXPLORE →
+          </span>
+
+        </a>
+
+
+        <a href="#frenchcore"
+           class="genre-card genre-frenchcore">
+
+          <div class="genre-symbol">⚜</div>
+
+          <h3>FRENCHCORE</h3>
+
+          <p>Fast. Melodic. Distorted.</p>
+
+          <span class="genre-link">
+            EXPLORE →
+          </span>
+
+        </a>
+
+
+        <a href="#hard-techno"
+           class="genre-card genre-hard-techno">
+
+          <div class="genre-symbol">⚙</div>
+
+          <h3>HARD TECHNO</h3>
+
+          <p>Dark. Driving. Industrial.</p>
+
+          <span class="genre-link">
+            EXPLORE →
+          </span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- UPCOMING EVENTS -->
+
+    <section class="content-section"
+             id="upcoming-events">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            EXPERIENCE IT LIVE
+          </span>
+
+          <h2>UPCOMING EVENTS</h2>
+
+        </div>
+
+        <a href="#events"
+           class="section-link">
+          VIEW ALL EVENTS →
+        </a>
+
+      </div>
+
+      <div class="event-grid"
+           id="event-list">
+
+        <article class="event-card">
+
+          <div class="event-image event-placeholder">
+            HARDCORE
+          </div>
+
+          <div class="event-content">
+            <h3>Hardcore Events</h3>
+            <p>Coming soon</p>
+          </div>
+
+        </article>
+
+
+        <article class="event-card">
+
+          <div class="event-image event-placeholder">
+            HARDSTYLE
+          </div>
+
+          <div class="event-content">
+            <h3>Hardstyle Events</h3>
+            <p>Coming soon</p>
+          </div>
+
+        </article>
+
+
+        <article class="event-card">
+
+          <div class="event-image event-placeholder">
+            HARDER STYLES
+          </div>
+
+          <div class="event-content">
+            <h3>More Events</h3>
+            <p>Coming soon</p>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="site-footer">
+
+    <div class="footer-container">
+
+      <img src="/harderbpm-logo.png"
+           alt="HarderBPM"
+           class="footer-logo">
+
+      <p>One place. The hardest sounds.</p>
+
+      <div class="footer-links">
+
+        <a href="#home">Home</a>
+
+        <a href="#genres">Genres</a>
+
+        <a href="#events">Events</a>
+
+        <a href="#privacy">Privacy &amp; Cookies</a>
+
+      </div>
+
+      <p class="copyright">
+        &copy; 2026 HarderBPM
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       PERMANENT RADIO PLAYER
+       Outside dynamic page content
+  ========================== -->
+
+  <div class="radio-player"
+       id="radio-player">
+
+    <div class="player-container">
+
+      <div class="player-station">
+
+        <div class="player-artwork"
+             id="player-artwork">
+          BPM
+        </div>
+
+        <div class="player-station-info"
+             aria-live="polite">
+
+          <span class="player-label">
+            NOW PLAYING
+          </span>
+
+          <strong id="player-station-name">
+            Select a station
+          </strong>
+
+          <span id="player-station-genre">
+            HarderBPM Radio
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="player-controls">
+
+        <button id="player-button"
+                class="player-play-button"
+                type="button"
+                aria-label="Play radio"
+                disabled>
+          ▶
+        </button>
+
+      </div>
+
+
+      <div class="player-volume">
+
+        <label for="volume-slider">
+          VOLUME
+        </label>
+
+        <input type="range"
+               id="volume-slider"
+               min="0"
+               max="1"
+               step="0.01"
+               value="0.5">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Permanent audio element -->
+
+  <audio id="audio-player"
+         preload="none">
+  </audio>
+
+
+  <!-- JavaScript modules -->
+
+  <script type="module"
+          src="./app.js"></script>
 
 </body>
+
 </html>
